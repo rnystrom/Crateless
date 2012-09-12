@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9400D0EF15D9891500195A9E /* Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = 9400D0EE15D9891500195A9E /* Defines.m */; };
+		9462748415D1A914005645E7 /* ImagePickerCircleOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9462748315D1A914005645E7 /* ImagePickerCircleOverlay.m */; };
+		9462748715D1AB0F005645E7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9462748615D1AB0F005645E7 /* QuartzCore.framework */; };
+		946274BB15D3066D005645E7 /* UIImage+AlteringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 946274BA15D3066D005645E7 /* UIImage+AlteringUtilities.m */; };
+		9467D4BA15CEE58000840EF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4B915CEE58000840EF8 /* UIKit.framework */; };
+		9467D4BC15CEE58000840EF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4BB15CEE58000840EF8 /* Foundation.framework */; };
+		9467D4BE15CEE58000840EF8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4BD15CEE58000840EF8 /* CoreGraphics.framework */; };
+		9467D4C415CEE58000840EF8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9467D4C215CEE58000840EF8 /* InfoPlist.strings */; };
+		9467D4C615CEE58000840EF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4C515CEE58000840EF8 /* main.m */; };
+		9467D4CA15CEE58000840EF8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4C915CEE58000840EF8 /* AppDelegate.m */; };
+		9467D4CD15CEE58000840EF8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9467D4CB15CEE58000840EF8 /* MainStoryboard.storyboard */; };
+		9467D4D815CEE58000840EF8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4D715CEE58000840EF8 /* SenTestingKit.framework */; };
+		9467D4D915CEE58000840EF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4B915CEE58000840EF8 /* UIKit.framework */; };
+		9467D4DA15CEE58000840EF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4BB15CEE58000840EF8 /* Foundation.framework */; };
+		9467D4E215CEE58000840EF8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9467D4E015CEE58000840EF8 /* InfoPlist.strings */; };
+		9467D4E515CEE58000840EF8 /* CratelessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4E415CEE58000840EF8 /* CratelessTests.m */; };
+		9467D4F215CEE5A700840EF8 /* CratelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4EF15CEE5A700840EF8 /* CratelessViewController.m */; };
+		9467D4F315CEE5A700840EF8 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4F115CEE5A700840EF8 /* Dog.m */; };
+		9467D4F915CEF80000840EF8 /* DogButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4F815CEF80000840EF8 /* DogButton.m */; };
+		94B0620A15D9F46D001BDAA6 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B0620415D9F46D001BDAA6 /* camera.png */; };
+		94B0620B15D9F46D001BDAA6 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B0620515D9F46D001BDAA6 /* camera@2x.png */; };
+		94B0620C15D9F46D001BDAA6 /* crate.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B0620615D9F46D001BDAA6 /* crate.png */; };
+		94B0620D15D9F46D001BDAA6 /* crate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B0620715D9F46D001BDAA6 /* crate@2x.png */; };
+		94B0620E15D9F46D001BDAA6 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B0620815D9F46D001BDAA6 /* door.png */; };
+		94B0620F15D9F46D001BDAA6 /* door@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B0620915D9F46D001BDAA6 /* door@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9467D4DB15CEE58000840EF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9467D4AC15CEE57F00840EF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9467D4B415CEE58000840EF8;
+			remoteInfo = Crateless;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9400D0ED15D9891500195A9E /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		9400D0EE15D9891500195A9E /* Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defines.m; sourceTree = "<group>"; };
+		9462748215D1A914005645E7 /* ImagePickerCircleOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImagePickerCircleOverlay.h; path = Crateless/ImagePickerCircleOverlay.h; sourceTree = "<group>"; };
+		9462748315D1A914005645E7 /* ImagePickerCircleOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImagePickerCircleOverlay.m; path = Crateless/ImagePickerCircleOverlay.m; sourceTree = "<group>"; };
+		9462748615D1AB0F005645E7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		946274B915D3066D005645E7 /* UIImage+AlteringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AlteringUtilities.h"; sourceTree = "<group>"; };
+		946274BA15D3066D005645E7 /* UIImage+AlteringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AlteringUtilities.m"; sourceTree = "<group>"; };
+		9467D4B515CEE58000840EF8 /* Crateless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crateless.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9467D4B915CEE58000840EF8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9467D4BB15CEE58000840EF8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9467D4BD15CEE58000840EF8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9467D4C115CEE58000840EF8 /* Crateless-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Crateless-Info.plist"; sourceTree = "<group>"; };
+		9467D4C315CEE58000840EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9467D4C515CEE58000840EF8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9467D4C715CEE58000840EF8 /* Crateless-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Crateless-Prefix.pch"; sourceTree = "<group>"; };
+		9467D4C815CEE58000840EF8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9467D4C915CEE58000840EF8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9467D4CC15CEE58000840EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		9467D4D615CEE58000840EF8 /* CratelessTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CratelessTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9467D4D715CEE58000840EF8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		9467D4DF15CEE58000840EF8 /* CratelessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CratelessTests-Info.plist"; sourceTree = "<group>"; };
+		9467D4E115CEE58000840EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9467D4E315CEE58000840EF8 /* CratelessTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CratelessTests.h; sourceTree = "<group>"; };
+		9467D4E415CEE58000840EF8 /* CratelessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CratelessTests.m; sourceTree = "<group>"; };
+		9467D4EE15CEE5A700840EF8 /* CratelessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CratelessViewController.h; path = Crateless/CratelessViewController.h; sourceTree = "<group>"; };
+		9467D4EF15CEE5A700840EF8 /* CratelessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CratelessViewController.m; path = Crateless/CratelessViewController.m; sourceTree = "<group>"; };
+		9467D4F015CEE5A700840EF8 /* Dog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dog.h; path = Crateless/Dog.h; sourceTree = "<group>"; };
+		9467D4F115CEE5A700840EF8 /* Dog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dog.m; path = Crateless/Dog.m; sourceTree = "<group>"; };
+		9467D4F715CEF80000840EF8 /* DogButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DogButton.h; path = Crateless/DogButton.h; sourceTree = "<group>"; };
+		9467D4F815CEF80000840EF8 /* DogButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DogButton.m; path = Crateless/DogButton.m; sourceTree = "<group>"; };
+		94B0620415D9F46D001BDAA6 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		94B0620515D9F46D001BDAA6 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		94B0620615D9F46D001BDAA6 /* crate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crate.png; sourceTree = "<group>"; };
+		94B0620715D9F46D001BDAA6 /* crate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crate@2x.png"; sourceTree = "<group>"; };
+		94B0620815D9F46D001BDAA6 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
+		94B0620915D9F46D001BDAA6 /* door@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "door@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9467D4B215CEE58000840EF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9462748715D1AB0F005645E7 /* QuartzCore.framework in Frameworks */,
+				9467D4BA15CEE58000840EF8 /* UIKit.framework in Frameworks */,
+				9467D4BC15CEE58000840EF8 /* Foundation.framework in Frameworks */,
+				9467D4BE15CEE58000840EF8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9467D4D215CEE58000840EF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9467D4D815CEE58000840EF8 /* SenTestingKit.framework in Frameworks */,
+				9467D4D915CEE58000840EF8 /* UIKit.framework in Frameworks */,
+				9467D4DA15CEE58000840EF8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9467D4AA15CEE57F00840EF8 = {
+			isa = PBXGroup;
+			children = (
+				94B0620315D9F46D001BDAA6 /* Graphics */,
+				9467D4F515CEE62000840EF8 /* Views */,
+				9467D4F415CEE61400840EF8 /* Models */,
+				9467D4BF15CEE58000840EF8 /* System */,
+				9467D4DD15CEE58000840EF8 /* CratelessTests */,
+				9467D4B815CEE58000840EF8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9467D4B615CEE58000840EF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9467D4B515CEE58000840EF8 /* Crateless.app */,
+				9467D4D615CEE58000840EF8 /* CratelessTests.octest */,
+			);
+			name = Products;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		9467D4B815CEE58000840EF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9462748615D1AB0F005645E7 /* QuartzCore.framework */,
+				9467D4B915CEE58000840EF8 /* UIKit.framework */,
+				9467D4BB15CEE58000840EF8 /* Foundation.framework */,
+				9467D4BD15CEE58000840EF8 /* CoreGraphics.framework */,
+				9467D4D715CEE58000840EF8 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9467D4BF15CEE58000840EF8 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				9400D0ED15D9891500195A9E /* Defines.h */,
+				9400D0EE15D9891500195A9E /* Defines.m */,
+				9467D4C815CEE58000840EF8 /* AppDelegate.h */,
+				9467D4C915CEE58000840EF8 /* AppDelegate.m */,
+				9467D4C115CEE58000840EF8 /* Crateless-Info.plist */,
+				9467D4C215CEE58000840EF8 /* InfoPlist.strings */,
+				9467D4C515CEE58000840EF8 /* main.m */,
+				9467D4C715CEE58000840EF8 /* Crateless-Prefix.pch */,
+				9467D4B615CEE58000840EF8 /* Products */,
+				946274B915D3066D005645E7 /* UIImage+AlteringUtilities.h */,
+				946274BA15D3066D005645E7 /* UIImage+AlteringUtilities.m */,
+			);
+			name = System;
+			path = Crateless;
+			sourceTree = "<group>";
+		};
+		9467D4DD15CEE58000840EF8 /* CratelessTests */ = {
+			isa = PBXGroup;
+			children = (
+				9467D4E315CEE58000840EF8 /* CratelessTests.h */,
+				9467D4E415CEE58000840EF8 /* CratelessTests.m */,
+				9467D4DE15CEE58000840EF8 /* Supporting Files */,
+			);
+			path = CratelessTests;
+			sourceTree = "<group>";
+		};
+		9467D4DE15CEE58000840EF8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9467D4DF15CEE58000840EF8 /* CratelessTests-Info.plist */,
+				9467D4E015CEE58000840EF8 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9467D4F415CEE61400840EF8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9467D4F015CEE5A700840EF8 /* Dog.h */,
+				9467D4F115CEE5A700840EF8 /* Dog.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		9467D4F515CEE62000840EF8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9462748215D1A914005645E7 /* ImagePickerCircleOverlay.h */,
+				9462748315D1A914005645E7 /* ImagePickerCircleOverlay.m */,
+				9467D4F615CEE62600840EF8 /* NIBs */,
+				9467D4EE15CEE5A700840EF8 /* CratelessViewController.h */,
+				9467D4EF15CEE5A700840EF8 /* CratelessViewController.m */,
+				9467D4FA15CEF80400840EF8 /* Custom */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9467D4F615CEE62600840EF8 /* NIBs */ = {
+			isa = PBXGroup;
+			children = (
+				9467D4CB15CEE58000840EF8 /* MainStoryboard.storyboard */,
+			);
+			name = NIBs;
+			sourceTree = "<group>";
+		};
+		9467D4FA15CEF80400840EF8 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				9467D4F715CEF80000840EF8 /* DogButton.h */,
+				9467D4F815CEF80000840EF8 /* DogButton.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		94B0620315D9F46D001BDAA6 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				94B0620415D9F46D001BDAA6 /* camera.png */,
+				94B0620515D9F46D001BDAA6 /* camera@2x.png */,
+				94B0620615D9F46D001BDAA6 /* crate.png */,
+				94B0620715D9F46D001BDAA6 /* crate@2x.png */,
+				94B0620815D9F46D001BDAA6 /* door.png */,
+				94B0620915D9F46D001BDAA6 /* door@2x.png */,
+			);
+			name = Graphics;
+			path = Rendered;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9467D4B415CEE58000840EF8 /* Crateless */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9467D4E815CEE58000840EF8 /* Build configuration list for PBXNativeTarget "Crateless" */;
+			buildPhases = (
+				9467D4B115CEE58000840EF8 /* Sources */,
+				9467D4B215CEE58000840EF8 /* Frameworks */,
+				9467D4B315CEE58000840EF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Crateless;
+			productName = Crateless;
+			productReference = 9467D4B515CEE58000840EF8 /* Crateless.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9467D4D515CEE58000840EF8 /* CratelessTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9467D4EB15CEE58000840EF8 /* Build configuration list for PBXNativeTarget "CratelessTests" */;
+			buildPhases = (
+				9467D4D115CEE58000840EF8 /* Sources */,
+				9467D4D215CEE58000840EF8 /* Frameworks */,
+				9467D4D315CEE58000840EF8 /* Resources */,
+				9467D4D415CEE58000840EF8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9467D4DC15CEE58000840EF8 /* PBXTargetDependency */,
+			);
+			name = CratelessTests;
+			productName = CratelessTests;
+			productReference = 9467D4D615CEE58000840EF8 /* CratelessTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9467D4AC15CEE57F00840EF8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Ryan Nystrom";
+			};
+			buildConfigurationList = 9467D4AF15CEE57F00840EF8 /* Build configuration list for PBXProject "Crateless" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9467D4AA15CEE57F00840EF8;
+			productRefGroup = 9467D4B615CEE58000840EF8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9467D4B415CEE58000840EF8 /* Crateless */,
+				9467D4D515CEE58000840EF8 /* CratelessTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9467D4B315CEE58000840EF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9467D4C415CEE58000840EF8 /* InfoPlist.strings in Resources */,
+				9467D4CD15CEE58000840EF8 /* MainStoryboard.storyboard in Resources */,
+				94B0620A15D9F46D001BDAA6 /* camera.png in Resources */,
+				94B0620B15D9F46D001BDAA6 /* camera@2x.png in Resources */,
+				94B0620C15D9F46D001BDAA6 /* crate.png in Resources */,
+				94B0620D15D9F46D001BDAA6 /* crate@2x.png in Resources */,
+				94B0620E15D9F46D001BDAA6 /* door.png in Resources */,
+				94B0620F15D9F46D001BDAA6 /* door@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9467D4D315CEE58000840EF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9467D4E215CEE58000840EF8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9467D4D415CEE58000840EF8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9467D4B115CEE58000840EF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9467D4C615CEE58000840EF8 /* main.m in Sources */,
+				9467D4CA15CEE58000840EF8 /* AppDelegate.m in Sources */,
+				9467D4F215CEE5A700840EF8 /* CratelessViewController.m in Sources */,
+				9467D4F315CEE5A700840EF8 /* Dog.m in Sources */,
+				9467D4F915CEF80000840EF8 /* DogButton.m in Sources */,
+				9462748415D1A914005645E7 /* ImagePickerCircleOverlay.m in Sources */,
+				946274BB15D3066D005645E7 /* UIImage+AlteringUtilities.m in Sources */,
+				9400D0EF15D9891500195A9E /* Defines.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9467D4D115CEE58000840EF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9467D4E515CEE58000840EF8 /* CratelessTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9467D4DC15CEE58000840EF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9467D4B415CEE58000840EF8 /* Crateless */;
+			targetProxy = 9467D4DB15CEE58000840EF8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9467D4C215CEE58000840EF8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9467D4C315CEE58000840EF8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9467D4CB15CEE58000840EF8 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9467D4CC15CEE58000840EF8 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			path = Crateless;
+			sourceTree = "<group>";
+		};
+		9467D4E015CEE58000840EF8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9467D4E115CEE58000840EF8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9467D4E615CEE58000840EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9467D4E715CEE58000840EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9467D4E915CEE58000840EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Crateless/Crateless-Prefix.pch";
+				INFOPLIST_FILE = "Crateless/Crateless-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9467D4EA15CEE58000840EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Crateless/Crateless-Prefix.pch";
+				INFOPLIST_FILE = "Crateless/Crateless-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9467D4EC15CEE58000840EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Crateless.app/Crateless";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Crateless/Crateless-Prefix.pch";
+				INFOPLIST_FILE = "CratelessTests/CratelessTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9467D4ED15CEE58000840EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Crateless.app/Crateless";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Crateless/Crateless-Prefix.pch";
+				INFOPLIST_FILE = "CratelessTests/CratelessTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9467D4AF15CEE57F00840EF8 /* Build configuration list for PBXProject "Crateless" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9467D4E615CEE58000840EF8 /* Debug */,
+				9467D4E715CEE58000840EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9467D4E815CEE58000840EF8 /* Build configuration list for PBXNativeTarget "Crateless" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9467D4E915CEE58000840EF8 /* Debug */,
+				9467D4EA15CEE58000840EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9467D4EB15CEE58000840EF8 /* Build configuration list for PBXNativeTarget "CratelessTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9467D4EC15CEE58000840EF8 /* Debug */,
+				9467D4ED15CEE58000840EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9467D4AC15CEE57F00840EF8 /* Project object */;
+}
