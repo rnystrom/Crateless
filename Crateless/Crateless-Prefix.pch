@@ -16,4 +16,8 @@
 #import "UIImage+AlteringUtilities.h"
 #import "Dog.h"
 
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#endif
+
 #endif

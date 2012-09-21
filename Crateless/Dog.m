@@ -15,6 +15,9 @@ static NSString *dogLastCratedKey = @"crateless_dogLastCratedKey";
 static NSString *dogIsCratedKey = @"crateless_dogIsCratedKey";
 static NSString *dogNotificationKey = @"crateless_dogNotificationKey";
 
+static CGFloat secondsInWeek = 604800.0f;
+static CGFloat secondsInHour = 3600.0f;
+
 @implementation Dog
 {
     NSString *latestError;
@@ -38,8 +41,8 @@ static NSString *dogNotificationKey = @"crateless_dogNotificationKey";
     if (self = [super init]) {
         // Wipe all defaults
         // for testing only
-        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+//        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+//        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
@@ -97,9 +100,46 @@ static NSString *dogNotificationKey = @"crateless_dogNotificationKey";
     return latestError;
 }
 
+// loosely based on 1 hour per month
 - (NSTimeInterval)maxTimeInCrate
 {
-    return 10.0f;
+    NSTimeInterval ageSeconds = [self.birthDate timeIntervalSinceNow];
+    CGFloat ageWeeks = -1 * ageSeconds / secondsInWeek;
+    NSLog(@"%f",ageWeeks);
+    if (ageWeeks < 8) {
+        return 0.5 * secondsInHour;
+    }
+    
+    NSLog(@"%@ - %f",self.birthDate,ageWeeks);
+    
+    CGFloat maxAge = 50.0f;
+    CGFloat maxhours = 8.0f;
+    NSInteger points = 4;
+    CGFloat ages[] = {8.0f, 10.0f, 14.0f, 16.0f};
+    CGFloat hours[] = {0.5f, 1.0f, 3.0f, 4.0f};
+    
+    for (int i = 0; i < points; ++i) {
+        if (i != 3 && ageWeeks > ages[i] && ageWeeks < ages[i + 1]) {
+            // ex, age = 13.01
+            // i = 1
+            // between 10 - 14
+            // 1 - 3 hours
+            CGFloat range = hours[i + 1] - hours[i];                    // 2
+            CGFloat min = ageWeeks - ages[i];                           // 13.01 - 10 = 3.01
+            CGFloat scale = range / min;                                // 2 / 3.01 = .664451827
+            CGFloat crateTime = scale * hours[i + 1] * secondsInHour;   // .664451827 * 3 * 3600 = 7176.0797316
+            return crateTime;
+        }
+    }
+    if (ageWeeks < maxAge) {
+        CGFloat lastHours = hours[points - 1];
+        CGFloat range = maxhours - lastHours;
+        CGFloat min = maxAge - ageWeeks;
+        CGFloat scale = range / min;
+        CGFloat crateTime = (lastHours + scale * maxhours) * secondsInHour;
+        return crateTime;
+    }
+    return maxhours * secondsInHour;
 }
 
 - (void)sync
@@ -152,25 +192,44 @@ static NSString *dogNotificationKey = @"crateless_dogNotificationKey";
     });
 }
 
+- (void) reset
+{
+    self.name = nil;
+    self.birthDate = nil;
+    self.image = nil;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, kNilOptions), ^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:dogNameKey];
+        [defaults removeObjectForKey:dogIsCratedKey];
+        [defaults removeObjectForKey:dogLastCratedKey];
+        [defaults removeObjectForKey:dogDateKey];
+        [defaults synchronize];
+    });
+}
+
 #pragma mark - Private
 
 - (void)createNotification
 {
-    NSString *messageString = [NSString stringWithFormat:@"%@ has been in the crate for too long, its time to go out!",[self name]];
-    
-    NSDate *now = [NSDate date];
-    NSDate *scheduleDate = [now dateByAddingTimeInterval:[self maxTimeInCrate]];
-    
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    [notification setTimeZone:[NSTimeZone defaultTimeZone]];
-    [notification setFireDate:scheduleDate];
-    [notification setAlertAction:@"Ok"];
-    [notification setAlertBody:messageString];
-    [notification setSoundName:UILocalNotificationDefaultSoundName];
-    [notification setApplicationIconBadgeNumber:1];
-    
-    [self setNotification:notification];
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"canSendNotifications"]) {
+        NSString *messageString = [NSString stringWithFormat:@"%@ has been in the crate for too long, its time to go out!",[self name]];
+        
+        NSDate *now = [NSDate date];
+        NSDate *scheduleDate = [now dateByAddingTimeInterval:[self maxTimeInCrate]];
+        
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        [notification setTimeZone:[NSTimeZone defaultTimeZone]];
+        [notification setFireDate:scheduleDate];
+        [notification setAlertAction:@"Ok"];
+        [notification setAlertBody:messageString];
+        [notification setSoundName:UILocalNotificationDefaultSoundName];
+        [notification setApplicationIconBadgeNumber:1];
+        
+        [self setNotification:notification];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
 }
 
 - (void)cancelNotification
@@ -184,5 +243,14 @@ static NSString *dogNotificationKey = @"crateless_dogNotificationKey";
 #pragma mark - Setters
 
 #pragma mark - Getters
+
+- (NSString*)birthDateString {
+    return [self.dateFormatter stringFromDate:self.birthDate];
+}
+
+- (NSString*)ageString {
+    CGFloat age = -1 * [self.birthDate timeIntervalSinceNow];
+    return [NSString stringWithFormat:@"%.0f weeks",age / secondsInWeek];
+}
 
 @end

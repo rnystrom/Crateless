@@ -27,5 +27,8 @@
 - (void)sync;
 - (void)crate;
 - (void)uncrate;
+- (NSString*)birthDateString;
+- (NSString*)ageString;
+- (void)reset;
 
 @end

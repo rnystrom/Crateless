@@ -10,6 +10,9 @@
 
 @interface DogButton : UIButton
 
-@property (strong, nonatomic) UIImage *dogImage;
+@property (strong, nonatomic) Dog *dog;
+@property (strong, nonatomic) UILabel *nameLabel;
+
+- (void)reset;
 
 @end

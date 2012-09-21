@@ -15,6 +15,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [application setApplicationIconBadgeNumber:0];
+    
+    [self setupAppearance];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (! [defaults boolForKey:@"isFirstRun"]) {
+        [defaults setBool:YES forKey:@"canSendNotifications"];
+        [defaults setBool:YES forKey:@"isFirstRun"];
+        [defaults synchronize];
+    }
+    
     return YES;
 }
 							
@@ -49,11 +59,19 @@
     [notification setApplicationIconBadgeNumber:0];
     [application setApplicationIconBadgeNumber:0];
     
-    NSString *cancelButton = [notification alertAction];
-    NSString *message = [notification alertBody];
-    
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Crateless" message:message delegate:nil cancelButtonTitle:cancelButton otherButtonTitles:nil];
-    [av show];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"canSendNotifications"]) {
+        NSString *cancelButton = [notification alertAction];
+        NSString *message = [notification alertBody];
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Crateless" message:message delegate:nil cancelButtonTitle:cancelButton otherButtonTitles:nil];
+        [av show];
+    }
+}
+
+- (void)setupAppearance {
+    id appearance = [UIToolbar appearance];
+    [appearance setBackgroundImage:[UIImage imageNamed:@"toolbar"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    [appearance setTintColor:[UIColor colorWithRed:0.182 green:0.189 blue:0.189 alpha:1.000]];
 }
 
 @end

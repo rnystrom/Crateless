@@ -12,22 +12,62 @@
 
 #pragma mark - Setters
 
-- (void)setDogImage:(UIImage *)dogImage
+- (void)setDog:(Dog *)dog
 {
-    _dogImage = dogImage;
+    _dog = dog;
     
-    [self setImage:dogImage forState:UIControlStateNormal];
-    [self setImage:dogImage forState:UIControlStateHighlighted];
-    [self setImage:dogImage forState:UIControlStateSelected];
+    [self setBackgroundImage:dog.image forState:UIControlStateNormal];
+    [self setBackgroundImage:dog.image forState:UIControlStateHighlighted];
+    [self setBackgroundImage:dog.image forState:UIControlStateSelected];
+    
+    UIImage *coverImage = [UIImage imageNamed:@"dog-overlay"];
+    [self setImage:coverImage forState:UIControlStateNormal];
+    [self setImage:coverImage forState:UIControlStateHighlighted];
+    [self setImage:coverImage forState:UIControlStateSelected];
+    
+    CGFloat width = 0;
+    if (self.superview) {
+        width = self.superview.bounds.size.width;
+    }
+    else {
+        width = self.bounds.size.width;
+    }
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 20.0f)];
+    self.nameLabel.font = [UIFont fontWithName:@"LucidaGrande-Bold" size:20.0f];
+    self.nameLabel.text = dog.name;
+    self.nameLabel.textAlignment = NSTextAlignmentCenter;
+    self.nameLabel.textColor = [UIColor whiteColor];
+    self.nameLabel.backgroundColor = [UIColor clearColor];
+    self.nameLabel.shadowColor = [UIColor blackColor];
+    self.nameLabel.shadowOffset = CGSizeMake(0, -1);
+    self.nameLabel.center = CGPointMake(self.bounds.size.width / 2.0f, -20.0f);
+    self.nameLabel.hidden = YES;
+    
+    [self addSubview:self.nameLabel];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)reset
 {
-    // Drawing code
+    [self setBackgroundImage:nil forState:UIControlStateNormal];
+    [self setBackgroundImage:nil forState:UIControlStateHighlighted];
+    [self setBackgroundImage:nil forState:UIControlStateSelected];
+    
+    UIImage *coverImage = [UIImage imageNamed:@"camera"];
+    [self setImage:coverImage forState:UIControlStateNormal];
+    [self setImage:coverImage forState:UIControlStateHighlighted];
+    [self setImage:coverImage forState:UIControlStateSelected];
+    
+    [self.nameLabel removeFromSuperview];
+    self.nameLabel = nil;
 }
-*/
+
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    
+    if (self.nameLabel) {
+        self.nameLabel.center = CGPointMake(frame.size.width / 2.0f, -20.0f);
+    }
+}
 
 @end

@@ -26,8 +26,18 @@
 @property (strong, nonatomic) UIImageView *crateView;
 @property (strong, nonatomic) UIImageView *crateDoorView;
 @property (assign, nonatomic) BOOL isCrateMode;
-//@property (assign, nonatomic) BOOL isCrated;
 @property (strong, nonatomic) UILabel *countdownLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+//nib
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightButton;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (strong, nonatomic) IBOutlet UIView *view;
+@property (weak, nonatomic) IBOutlet UILabel *leftToolbarLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightToolbarLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
+
+- (IBAction)onRightButton:(id)sender;
 
 @end
 
@@ -82,6 +92,10 @@
     [self setRightButton:nil];
     [self setToolBar:nil];
     [self setView:nil];
+    [self setLeftToolbarLabel:nil];
+    [self setRightToolbarLabel:nil];
+    [self setBackgroundView:nil];
+    [self setTimeLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -96,14 +110,19 @@
 - (IBAction)onRightButton:(id)sender
 {
     if ([self isCrateMode]) {
-
+        UINavigationController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"Settings"];
+        controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        
+        SettingsViewController *settings = controller.viewControllers[0];
+        settings.delegate = self;
+        
+        [self presentModalViewController:controller animated:YES];
     }
     else {
         Dog *dog = [Dog sharedInstance];
         
         [dog setName:[[self nameTextField] text]];
         [dog setBirthDate:[self selectedDate]];
-        [dog setImage:[self selectedImage]];
         
         if ([dog isValid]) {
             [dog sync];
@@ -122,39 +141,59 @@
 - (void)setupViews
 {
     if (! [self crateView]) {
-        // FIXME: use a UIImage
         UIImageView *crateView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"crate"]];
-        [crateView setBackgroundColor:[UIColor redColor]];
         [crateView setOpaque:NO];
+        crateView.layer.shadowColor = [UIColor blackColor].CGColor;
+        crateView.layer.shadowOffset = CGSizeZero;
+        crateView.layer.shadowRadius = 7.0f;
+        crateView.layer.shadowOpacity = 0.7f;
         [self setCrateView:crateView];
         [[self view] insertSubview:[self crateView] belowSubview:[self toolBar]];
     }
 
     if (! [self imagePickerButton]) {
         DogButton *imagePicker = [[DogButton alloc] initWithFrame:CGRectMake(0, 0, kImageButtonWidth, kImageButtonHeight)];
-        [imagePicker setImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
         [imagePicker addTarget:self action:@selector(onImageButton:) forControlEvents:UIControlEventTouchUpInside];
+        [imagePicker reset];
         [self setImagePickerButton:imagePicker];
         [[self view] insertSubview:[self imagePickerButton] belowSubview:[self toolBar]];
     }
     
+    UIFont *contentFont = [UIFont fontWithName:@"LucidaGrande-Bold" size:17.0f];
+    UIColor *contentColor = [UIColor colorWithRed:0.274 green:0.397 blue:0.516 alpha:1.000];
     if (! [self nameTextField]) {
         CGRect nameFrame = CGRectMake(0, 0, kTextFieldWidth, kTextFieldHeight);
         UITextField *nameField = [[UITextField alloc] initWithFrame:nameFrame];
+        [nameField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+        [nameField setBackground:[UIImage imageNamed:@"name"]];
         [nameField setBorderStyle:UITextBorderStyleNone];
-        [nameField setPlaceholder:@"Name"];
-        [nameField setBackgroundColor:[UIColor whiteColor]];
+        [nameField setBackgroundColor:[UIColor clearColor]];
         [nameField setDelegate:self];
+        [nameField setFont:contentFont];
+        [nameField setTextAlignment:NSTextAlignmentLeft];
+        [nameField setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [nameField setTextColor:contentColor];
+        
+        // hack for padding
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 74, 5)];
+        nameField.leftView = paddingView;
+        nameField.leftViewMode = UITextFieldViewModeAlways;
+        
         [self setNameTextField:nameField];
         [[self view] addSubview:[self nameTextField]];
     }
 
     if (! [self dateButton]) {
         CGRect dateFrame = CGRectMake(0, 0, kTextFieldWidth, kTextFieldHeight);
-        UIButton *dateButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton *dateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [dateButton setBackgroundImage:[UIImage imageNamed:@"date"] forState:UIControlStateNormal];
+        [dateButton setBackgroundColor:[UIColor clearColor]];
         [dateButton setFrame:dateFrame];
-        [dateButton setTitle:@"Birthday" forState:UIControlStateNormal];
         [dateButton addTarget:self action:@selector(onDateButton:) forControlEvents:UIControlEventTouchUpInside];
+        [dateButton.titleLabel setFont:contentFont];
+        [dateButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
+        dateButton.titleEdgeInsets = UIEdgeInsetsMake(0, 30.0f, 0, 0);
+        [dateButton setTitleColor:contentColor forState:UIControlStateNormal];
         [self setDateButton:dateButton];
         [[self view] addSubview:[self dateButton]];
     }
@@ -172,11 +211,12 @@
     }
     
     //maths for y of name/date textfields
-    CGFloat screenWidth = [[self view] frame].size.width;
+    CGFloat screenWidth = [[self view] bounds].size.width;
+    CGFloat screenHeight = [[self view] bounds].size.height;
     CGFloat toolbarHeight = [[self toolBar] frame].size.height;
     CGFloat workableSpace = [[self view] frame].size.height - toolbarHeight;
     CGFloat requiredSpace = kImageButtonHeight + kTextFieldHeight * 2.0f;
-    CGFloat itemPadding = (workableSpace - requiredSpace) / 3.0f;
+    CGFloat itemPadding = (workableSpace - requiredSpace) / 4.0f;
     CGFloat imageElasticHeight = toolbarHeight / 2.0f + itemPadding + kImageButtonHeight / 2.0f;
     CGFloat nameTextFieldElasticHeight = imageElasticHeight + itemPadding + kImageButtonHeight / 2.0f;
     CGFloat dateTextFieldElasticHeight = nameTextFieldElasticHeight + itemPadding + kImageButtonHeight / 2.0f;
@@ -185,16 +225,45 @@
     originalNameTextField.center = CGPointMake(screenWidth / 2.0f, nameTextFieldElasticHeight);
     originalDateButton.center = CGPointMake(screenWidth / 2.0f, dateTextFieldElasticHeight);
     
-    createdImage.center = CGPointMake(screenWidth / 2.0f, 330.0f);
+    createdImage.center = CGPointMake(screenWidth / 2.0f, screenHeight / 3.0f * 2.0f);
     createdCrate = originalImage;
     
     offscreenCrateCenter = CGPointMake(screenWidth + [[self crateView] frame].size.width / 2.0f, createdCrate.center.y);
     offscreenCrateDoorCenter = CGPointMake(offscreenCrateCenter.x + screenWidth / 2.0f, offscreenCrateCenter.y);
-    crateDoorCenter = CGPointMake(createdCrate.center.x + [[self crateDoorView] frame].size.width / 2.0f, createdCrate.center.y);
+    crateDoorCenter = CGPointMake(createdCrate.center.x + [[self crateDoorView] bounds].size.width / 2.0f, createdCrate.center.y);
+    
+    // set toolbar font
+    UIFont *toolbarFont = self.leftToolbarLabel.font;
+    self.leftToolbarLabel.font = [UIFont fontWithName:@"ThirstyScriptExtraBold" size:toolbarFont.pointSize];
+    self.rightToolbarLabel.font = [UIFont fontWithName:@"ThirstyScriptExtraBold" size:toolbarFont.pointSize];
+    self.rightToolbarLabel.textColor = [UIColor colorWithRed:0.998 green:0.891 blue:0.519 alpha:1.000];
+    
+    // set bg image if iphone 5
+    if ([UIScreen mainScreen].bounds.size.height > 480) {
+        CGRect frame = self.backgroundView.frame;
+        frame.size.height = [UIScreen mainScreen].bounds.size.height - 20 - self.toolBar.frame.size.height;
+        self.backgroundView.frame = frame;
+        self.backgroundView.image = [UIImage imageNamed:@"bg-568h"];
+    }
+    
+    // hide time label
+    self.timeLabel.hidden = YES;
 }
 
 - (void)setupCreateView
 {
+    if (! self.imagePickerButton || ! self.nameTextField || ! self.dateButton) {
+        [self setupViews];
+    }
+    
+    self.selectedDate = nil;
+    self.selectedImage = nil;
+    
+    CGRect imageFrame = [[self imagePickerButton] frame];
+    imageFrame.size.width = kImageButtonWidth;
+    imageFrame.size.height = kImageButtonHeight;
+    self.imagePickerButton.frame = imageFrame;
+    
     [[self imagePickerButton] setCenter:originalImage.center];
     [[self nameTextField] setCenter:originalNameTextField.center];
     [[self dateButton] setCenter:originalDateButton.center];
@@ -204,18 +273,32 @@
     originalImage.frame = [[self imagePickerButton] frame];
     originalNameTextField.frame = [[self nameTextField] frame];
     originalDateButton.frame = [[self dateButton] frame];
+    
+    if (self.countdownLabel) {
+        [self.countdownLabel removeFromSuperview];
+        self.countdownLabel = nil;
+    }
+    
+    [self rightbuttonToDone];
+    
+    [self.dateButton setTitle:@"Puppy's Birthday" forState:UIControlStateNormal];
+    self.nameTextField.text = @"Puppy's Name";
+    
+    // removes countdownlabel
+    [self updateCountdownLabel];
 }
 
 - (void)setupCrateView
 {
+    if (! self.imagePickerButton || ! self.nameTextField || ! self.dateButton) {
+        [self setupViews];
+    }
+    
     Dog *dog = [Dog sharedInstance];
     if ([dog isCrated]) {
         [self updateCountdownLabel];
         
-        CGRect imageFrame = [[self imagePickerButton] frame];
-        imageFrame.size.width = kCrateWidth;
-        imageFrame.size.height = kCrateHeight;
-        [[self imagePickerButton] setFrame:imageFrame];
+        [[self imagePickerButton] setFrame:[self cratedImageFrame]];
         [[self imagePickerButton] setCenter:createdCrate.center];
     }
     else {
@@ -225,7 +308,7 @@
     [[self crateView] setCenter:createdCrate.center];
     [[self crateDoorView] setCenter:crateDoorCenter];
     
-    [[self imagePickerButton] setDogImage:[dog image]];
+    [[self imagePickerButton] setDog:dog];
     
     [[self nameTextField] removeFromSuperview];
     [[self dateButton] removeFromSuperview];
@@ -236,9 +319,16 @@
     originalNameTextField.frame = [[self nameTextField] frame];
     originalDateButton.frame = [[self dateButton] frame];
     
-    [self removeRightButtonFromToolbar];
+    [self rightbuttonToSettings];
     
-    [self openCrateAndGrowDog];
+    if ([dog isCrated]) {
+        
+    }
+    else {
+        [self openCrateAndGrowDog];
+    }
+    
+    self.imagePickerButton.nameLabel.hidden = NO;
 }
 
 #pragma mark - Animations - Transitioning
@@ -253,24 +343,39 @@
     [self performSelector:@selector(slideDateOffRight) withObject:nil afterDelay:(totalTime += kSlideDuration + kTimingPadding)];
     [self performSelector:@selector(dropImageDown) withObject:nil afterDelay:(totalTime += kDropDuration + kTimingPadding)];
     [self performSelector:@selector(slideInCrate) withObject:nil afterDelay:(totalTime += kSlideDuration + kTimingPadding)];
+    [self performSelector:@selector(openCrateAndGrowDog) withObject:nil afterDelay:totalTime];
     
-    [self removeRightButtonFromToolbar];
+    [self rightbuttonToSettings];
 }
 
 - (void)transitionToCreateView
 {
+    [self.imagePickerButton reset];
     
+    [self setupCreateView];
+    
+    Dog *dog = [Dog sharedInstance];
+    dog.name = nil;
+    dog.birthDate = nil;
+    [dog sync];
 }
 
 #pragma mark - Animations - Block returns
 
 - (void)dropImageDown
 {
-    CGRect newFrame = originalImage.frame;
-    newFrame.origin.y += 200.0f;
+//    CGRect newFrame = originalImage.frame;
+//    newFrame.origin.y += 200.0f;
     
     [UIView animateWithDuration:kDropDuration animations:^{
-        [[self imagePickerButton] setFrame:newFrame];
+//        [[self imagePickerButton] setFrame:newFrame];
+        self.imagePickerButton.center = createdImage.center;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            Dog *dog = [Dog sharedInstance];
+            self.imagePickerButton.nameLabel.text = dog.name;
+            self.imagePickerButton.nameLabel.hidden = NO;
+        }
     }];
 }
 
@@ -326,11 +431,11 @@
 {
     [self setIsEditing:YES];
     
-    CGFloat toolBarHeight = [[self toolBar] frame].size.height;
-    CGFloat workableSpace = [[self view] frame].size.height - toolBarHeight - height;
+    CGFloat toolBarHeight = [[self toolBar] bounds].size.height;
+    CGFloat workableSpace = [[self view] bounds].size.height - toolBarHeight - height;
     CGFloat requiredSpace = kTextFieldHeight * 2.0f;
-    CGFloat itemPadding = (workableSpace - requiredSpace) / 2.0f;
-    CGFloat newNameY = toolBarHeight / 2.0f + itemPadding + kTextFieldHeight / 2.0f;
+    CGFloat itemPadding = (workableSpace - requiredSpace) / 3.0f;
+    CGFloat newNameY = toolBarHeight / 2.0f + 20.0f + itemPadding + kTextFieldHeight / 2.0f;
     CGFloat newDateY = newNameY + itemPadding * 2.0f + kTextFieldHeight / 2.0f;
     
     CGPoint newNameCenter = CGPointMake(originalNameTextField.center.x, newNameY);
@@ -369,13 +474,18 @@
         NSMutableString *timeFormat = [[NSMutableString alloc] initWithString:@""];
         
         if (timeRemainingInCrate > 0.0f) {
-            CGFloat hours = floorf(timeRemainingInCrate / (60.0f * 60.0f));
-            CGFloat minutes = floorf((timeRemainingInCrate - hours * 60.0f) / 60.0f);
-            CGFloat seconds = floorf(timeRemainingInCrate - minutes * 60.0f);
+            CGFloat hoursf = timeRemainingInCrate / (60.0f * 60.0f);
+            CGFloat hours = floorf(hoursf);
             
-            if (hours < 10.0f) {
-                [timeFormat appendString:@"0"];
-            }
+            CGFloat minutesf = (hoursf - hours) * 60.0f;
+            CGFloat minutes = floorf(minutesf);
+            
+            CGFloat secondsf = (minutesf - minutes) * 60.0f;
+            CGFloat seconds = floorf(secondsf);
+            
+//            if (hours < 10.0f) {
+//                [timeFormat appendString:@"0"];
+//            }
             [timeFormat appendString:[NSString stringWithFormat:@"%.0f:",hours]];
             if (minutes < 10.0f) {
                 [timeFormat appendString:@"0"];
@@ -387,22 +497,33 @@
             [timeFormat appendString:[NSString stringWithFormat:@"%.0f",seconds]];
         }
         else {
-            [timeFormat appendString:@"00:00:00"];
+            [timeFormat appendString:@"0:00:00"];
         }
         
         if ([self countdownLabel]) {
+            if (!self.countdownLabel.superview) {
+                [self.view addSubview:self.countdownLabel];
+            }
+            
             [[self countdownLabel] setText:timeFormat];
         }
         else {
             UILabel *countdownLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [[self view] frame].size.width, kCountdownFontSize)];
             [countdownLabel setText:timeFormat];
-            [countdownLabel setFont:[UIFont systemFontOfSize:kCountdownFontSize]];
+            [countdownLabel setFont:[UIFont fontWithName:@"LucidaGrande" size:60.0f]];
             [countdownLabel setTextColor:[UIColor whiteColor]];
             [countdownLabel setTextAlignment:UITextAlignmentCenter];
             [countdownLabel setCenter:createdImage.center];
             [countdownLabel setBackgroundColor:[UIColor clearColor]];
+            [countdownLabel setShadowColor:[UIColor blackColor]];
+            [countdownLabel setShadowOffset:CGSizeMake(0, -1)];
             [self setCountdownLabel:countdownLabel];
             [[self view] addSubview:[self countdownLabel]];
+            
+            self.timeLabel.hidden = NO;
+            CGRect frame = self.timeLabel.frame;
+            frame.origin.y = countdownLabel.frame.origin.y - 30.0f;
+            self.timeLabel.frame = frame;
         }
         
         if (timeRemainingInCrate > 0.0f) {
@@ -410,6 +531,7 @@
         }
     }
     else {
+        self.timeLabel.hidden = YES;
         [[self countdownLabel] removeFromSuperview];
         [self setCountdownLabel:nil];
     }
@@ -462,16 +584,13 @@
 
 - (void)shrinkDogWithCompletion:(void (^)())block
 {
-    CGRect imageFrame = [[self imagePickerButton] frame];
-    imageFrame.size.width = kCrateWidth;
-    imageFrame.size.height = kCrateHeight;
     CGPoint retainCenter = [[self imagePickerButton] center];
     
     [UIView animateWithDuration:kCrateDoorAnimationDuration
                           delay:0
                         options:UIViewAnimationCurveEaseIn
                      animations:^{
-                         [[self imagePickerButton] setFrame:imageFrame];
+                         [[self imagePickerButton] setFrame:[self cratedImageFrame]];
                          [[self imagePickerButton] setCenter:retainCenter];
                      }
                      completion:^(BOOL finished){
@@ -481,11 +600,24 @@
                      }];
 }
 
-- (void)removeRightButtonFromToolbar
+- (void)rightbuttonToSettings
 {
-    NSMutableArray *mutableToolbarItems = [[[self toolBar] items] mutableCopy];
-    [mutableToolbarItems removeObject:[self rightButton]];
-    [[self toolBar] setItems:mutableToolbarItems];
+    [self.rightButton setBackgroundImage:[UIImage imageNamed:@"gear"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    self.rightButton.image = [UIImage imageNamed:@"gear"];
+    self.rightButton.title = @"";
+//    self.rightButton.style = UIBarButtonItemStyleBordered;
+//    NSMutableArray *mutableToolbarItems = [[[self toolBar] items] mutableCopy];
+//    [mutableToolbarItems removeObject:[self rightButton]];
+//    [[self toolBar] setItems:mutableToolbarItems];
+}
+
+- (void)rightbuttonToDone
+{
+    [self.rightButton setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.rightButton.title = @"Done";
+//    NSMutableArray *mutableToolbarItems = [[[self toolBar] items] mutableCopy];
+//    [mutableToolbarItems removeObject:[self rightButton]];
+//    [[self toolBar] setItems:mutableToolbarItems];
 }
 
 #pragma mark - Actions - Create view
@@ -495,6 +627,7 @@
     if (! [self isCrateMode]) {
         [[self nameTextField] resignFirstResponder];
         
+#if !(TARGET_IPHONE_SIMULATOR)
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
         [picker setDelegate:self];
@@ -504,6 +637,9 @@
         [picker setCameraOverlayView:overlay];
         
         [self presentModalViewController:picker animated:YES];
+#else
+        [self didSelectImage:[UIImage imageNamed:@"zoey.jpg"]];
+#endif
     }
 }
 
@@ -546,6 +682,36 @@
         [[self dateButton] setTitle:dateText forState:UIControlStateNormal];
         [self setSelectedDate:selectedDate];
     }
+}
+
+- (void)didSelectImage:(UIImage*)image {
+    CGSize imageSize = [image size];
+    CGSize pickerSize = [self.view bounds].size;
+    CGSize imageButtonSize = originalImage.frame.size;
+    CGFloat resizeScale = kImageCroppedWidth / pickerSize.width;
+    CGFloat scaledImageCroppedWidth = imageSize.width * resizeScale;
+    
+    // reversed x + y because we are in portrait
+    CGRect cropRect = CGRectMake(imageSize.height / 2.0f - scaledImageCroppedWidth / 2.0f,
+                                 imageSize.width / 2.0f - scaledImageCroppedWidth / 2.0f,
+                                 scaledImageCroppedWidth,
+                                 scaledImageCroppedWidth);
+    UIImage *croppedImage = [image crop:cropRect];
+    UIImage *resizedImage = [croppedImage resize:imageButtonSize];
+    
+    UIGraphicsBeginImageContextWithOptions(resizedImage.size, NO, 1.0);
+    CGRect bounds = CGRectMake(0, 0, resizedImage.size.width, resizedImage.size.height);
+    [[UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:resizedImage.size.height / 2.0f] addClip];
+    [resizedImage drawInRect:bounds];
+    UIImage *roundedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [self setSelectedImage:roundedImage];
+    
+    Dog *dog = [Dog sharedInstance];
+    dog.image = self.selectedImage;
+    
+    [[self imagePickerButton] setDog:dog];
 }
 
 #pragma mark - Actions - Crate view
@@ -607,6 +773,15 @@
 }
 
 #pragma mark - Getters
+
+- (CGRect)cratedImageFrame
+{
+    CGRect imageFrame = [[self imagePickerButton] frame];
+    CGSize crateImageSize = [UIImage imageNamed:@"door"].size;
+    imageFrame.size.height = crateImageSize.height;
+    imageFrame.size.width = crateImageSize.height;
+    return imageFrame;
+}
 
 #pragma mark - NSNotifications
 
@@ -675,26 +850,25 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    CGSize imageSize = [selectedImage size];
-    CGSize pickerSize = [[picker view] frame].size;
-    CGSize imageButtonSize = originalImage.frame.size;
-    CGFloat resizeScale = kImageCroppedWidth / pickerSize.width;
-    CGFloat scaledImageCroppedWidth = imageSize.width * resizeScale;
-    
-    // reversed x + y because we are in portrait
-    CGRect cropRect = CGRectMake(imageSize.height / 2.0f - scaledImageCroppedWidth / 2.0f,
-                                 imageSize.width / 2.0f - scaledImageCroppedWidth / 2.0f,
-                                 scaledImageCroppedWidth,
-                                 scaledImageCroppedWidth);
-    UIImage *croppedImage = [selectedImage crop:cropRect];
-    UIImage *resizedImage = [croppedImage resize:imageButtonSize];
-    
-    [self setSelectedImage:resizedImage];
-    [[self imagePickerButton] setDogImage:[self selectedImage]];
-    
     [picker dismissModalViewControllerAnimated:YES];
+    UIImage *selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self didSelectImage:selectedImage];
+}
+
+#pragma mark - Settings delegate
+
+- (void)viewControllerShouldDismiss:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)shouldResetView:(id)sender {
+    Dog *dog = [Dog sharedInstance];
+    [dog uncrate];
+    [dog reset];
+    
+    [self setIsCrateMode:NO];
+    [self transitionToCreateView];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

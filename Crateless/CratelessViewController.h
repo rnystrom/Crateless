@@ -7,14 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsViewController.h"
 
 @interface CratelessViewController : UIViewController
-<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightButton;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
-@property (strong, nonatomic) IBOutlet UIView *view;
-
-- (IBAction)onRightButton:(id)sender;
+<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SettingsViewControllerDelegate>
 
 @end
