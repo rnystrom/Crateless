@@ -364,11 +364,7 @@
 
 - (void)dropImageDown
 {
-//    CGRect newFrame = originalImage.frame;
-//    newFrame.origin.y += 200.0f;
-    
     [UIView animateWithDuration:kDropDuration animations:^{
-//        [[self imagePickerButton] setFrame:newFrame];
         self.imagePickerButton.center = createdImage.center;
     } completion:^(BOOL finished) {
         if (finished) {
@@ -483,9 +479,6 @@
             CGFloat secondsf = (minutesf - minutes) * 60.0f;
             CGFloat seconds = floorf(secondsf);
             
-//            if (hours < 10.0f) {
-//                [timeFormat appendString:@"0"];
-//            }
             [timeFormat appendString:[NSString stringWithFormat:@"%.0f:",hours]];
             if (minutes < 10.0f) {
                 [timeFormat appendString:@"0"];
@@ -603,21 +596,13 @@
 - (void)rightbuttonToSettings
 {
     [self.rightButton setBackgroundImage:[UIImage imageNamed:@"gear"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-//    self.rightButton.image = [UIImage imageNamed:@"gear"];
     self.rightButton.title = @"";
-//    self.rightButton.style = UIBarButtonItemStyleBordered;
-//    NSMutableArray *mutableToolbarItems = [[[self toolBar] items] mutableCopy];
-//    [mutableToolbarItems removeObject:[self rightButton]];
-//    [[self toolBar] setItems:mutableToolbarItems];
 }
 
 - (void)rightbuttonToDone
 {
     [self.rightButton setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     self.rightButton.title = @"Done";
-//    NSMutableArray *mutableToolbarItems = [[[self toolBar] items] mutableCopy];
-//    [mutableToolbarItems removeObject:[self rightButton]];
-//    [[self toolBar] setItems:mutableToolbarItems];
 }
 
 #pragma mark - Actions - Create view

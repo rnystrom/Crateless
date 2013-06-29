@@ -58,25 +58,10 @@
 		9467D4C615CEE58000840EF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4C515CEE58000840EF8 /* main.m */; };
 		9467D4CA15CEE58000840EF8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4C915CEE58000840EF8 /* AppDelegate.m */; };
 		9467D4CD15CEE58000840EF8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9467D4CB15CEE58000840EF8 /* MainStoryboard.storyboard */; };
-		9467D4D815CEE58000840EF8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4D715CEE58000840EF8 /* SenTestingKit.framework */; };
-		9467D4D915CEE58000840EF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4B915CEE58000840EF8 /* UIKit.framework */; };
-		9467D4DA15CEE58000840EF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467D4BB15CEE58000840EF8 /* Foundation.framework */; };
-		9467D4E215CEE58000840EF8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9467D4E015CEE58000840EF8 /* InfoPlist.strings */; };
-		9467D4E515CEE58000840EF8 /* CratelessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4E415CEE58000840EF8 /* CratelessTests.m */; };
 		9467D4F215CEE5A700840EF8 /* CratelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4EF15CEE5A700840EF8 /* CratelessViewController.m */; };
 		9467D4F315CEE5A700840EF8 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4F115CEE5A700840EF8 /* Dog.m */; };
 		9467D4F915CEF80000840EF8 /* DogButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D4F815CEF80000840EF8 /* DogButton.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9467D4DB15CEE58000840EF8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9467D4AC15CEE57F00840EF8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9467D4B415CEE58000840EF8;
-			remoteInfo = Crateless;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		86032330160BB1B50019AA9C /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -138,12 +123,7 @@
 		9467D4C815CEE58000840EF8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9467D4C915CEE58000840EF8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9467D4CC15CEE58000840EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		9467D4D615CEE58000840EF8 /* CratelessTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CratelessTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9467D4D715CEE58000840EF8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		9467D4DF15CEE58000840EF8 /* CratelessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CratelessTests-Info.plist"; sourceTree = "<group>"; };
-		9467D4E115CEE58000840EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9467D4E315CEE58000840EF8 /* CratelessTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CratelessTests.h; sourceTree = "<group>"; };
-		9467D4E415CEE58000840EF8 /* CratelessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CratelessTests.m; sourceTree = "<group>"; };
 		9467D4EE15CEE5A700840EF8 /* CratelessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CratelessViewController.h; path = Crateless/CratelessViewController.h; sourceTree = "<group>"; };
 		9467D4EF15CEE5A700840EF8 /* CratelessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CratelessViewController.m; path = Crateless/CratelessViewController.m; sourceTree = "<group>"; };
 		9467D4F015CEE5A700840EF8 /* Dog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dog.h; path = Crateless/Dog.h; sourceTree = "<group>"; };
@@ -162,16 +142,6 @@
 				9467D4BA15CEE58000840EF8 /* UIKit.framework in Frameworks */,
 				9467D4BC15CEE58000840EF8 /* Foundation.framework in Frameworks */,
 				9467D4BE15CEE58000840EF8 /* CoreGraphics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9467D4D215CEE58000840EF8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9467D4D815CEE58000840EF8 /* SenTestingKit.framework in Frameworks */,
-				9467D4D915CEE58000840EF8 /* UIKit.framework in Frameworks */,
-				9467D4DA15CEE58000840EF8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,12 +221,11 @@
 		9467D4AA15CEE57F00840EF8 = {
 			isa = PBXGroup;
 			children = (
-				864FC3301600297800CF2B7B /* Resources */,
-				9467D4F515CEE62000840EF8 /* Views */,
-				9467D4F415CEE61400840EF8 /* Models */,
-				9467D4BF15CEE58000840EF8 /* System */,
-				9467D4DD15CEE58000840EF8 /* CratelessTests */,
 				9467D4B815CEE58000840EF8 /* Frameworks */,
+				9467D4F415CEE61400840EF8 /* Models */,
+				864FC3301600297800CF2B7B /* Resources */,
+				9467D4BF15CEE58000840EF8 /* System */,
+				9467D4F515CEE62000840EF8 /* Views */,
 			);
 			sourceTree = "<group>";
 		};
@@ -264,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				9467D4B515CEE58000840EF8 /* Crateless.app */,
-				9467D4D615CEE58000840EF8 /* CratelessTests.octest */,
 			);
 			name = Products;
 			path = ..;
@@ -300,25 +268,6 @@
 			);
 			name = System;
 			path = Crateless;
-			sourceTree = "<group>";
-		};
-		9467D4DD15CEE58000840EF8 /* CratelessTests */ = {
-			isa = PBXGroup;
-			children = (
-				9467D4E315CEE58000840EF8 /* CratelessTests.h */,
-				9467D4E415CEE58000840EF8 /* CratelessTests.m */,
-				9467D4DE15CEE58000840EF8 /* Supporting Files */,
-			);
-			path = CratelessTests;
-			sourceTree = "<group>";
-		};
-		9467D4DE15CEE58000840EF8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9467D4DF15CEE58000840EF8 /* CratelessTests-Info.plist */,
-				9467D4E015CEE58000840EF8 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		9467D4F415CEE61400840EF8 /* Models */ = {
@@ -382,25 +331,6 @@
 			productReference = 9467D4B515CEE58000840EF8 /* Crateless.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9467D4D515CEE58000840EF8 /* CratelessTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9467D4EB15CEE58000840EF8 /* Build configuration list for PBXNativeTarget "CratelessTests" */;
-			buildPhases = (
-				9467D4D115CEE58000840EF8 /* Sources */,
-				9467D4D215CEE58000840EF8 /* Frameworks */,
-				9467D4D315CEE58000840EF8 /* Resources */,
-				9467D4D415CEE58000840EF8 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9467D4DC15CEE58000840EF8 /* PBXTargetDependency */,
-			);
-			name = CratelessTests;
-			productName = CratelessTests;
-			productReference = 9467D4D615CEE58000840EF8 /* CratelessTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -423,7 +353,6 @@
 			projectRoot = "";
 			targets = (
 				9467D4B415CEE58000840EF8 /* Crateless */,
-				9467D4D515CEE58000840EF8 /* CratelessTests */,
 			);
 		};
 /* End PBXProject section */
@@ -476,31 +405,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9467D4D315CEE58000840EF8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9467D4E215CEE58000840EF8 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		9467D4D415CEE58000840EF8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9467D4B115CEE58000840EF8 /* Sources */ = {
@@ -519,23 +424,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9467D4D115CEE58000840EF8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9467D4E515CEE58000840EF8 /* CratelessTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9467D4DC15CEE58000840EF8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9467D4B415CEE58000840EF8 /* Crateless */;
-			targetProxy = 9467D4DB15CEE58000840EF8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9467D4C215CEE58000840EF8 /* InfoPlist.strings */ = {
@@ -553,14 +442,6 @@
 			);
 			name = MainStoryboard.storyboard;
 			path = Crateless;
-			sourceTree = "<group>";
-		};
-		9467D4E015CEE58000840EF8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9467D4E115CEE58000840EF8 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -641,40 +522,6 @@
 			};
 			name = Release;
 		};
-		9467D4EC15CEE58000840EF8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Crateless.app/Crateless";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Crateless/Crateless-Prefix.pch";
-				INFOPLIST_FILE = "CratelessTests/CratelessTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		9467D4ED15CEE58000840EF8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Crateless.app/Crateless";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Crateless/Crateless-Prefix.pch";
-				INFOPLIST_FILE = "CratelessTests/CratelessTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -692,15 +539,6 @@
 			buildConfigurations = (
 				9467D4E915CEE58000840EF8 /* Debug */,
 				9467D4EA15CEE58000840EF8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9467D4EB15CEE58000840EF8 /* Build configuration list for PBXNativeTarget "CratelessTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9467D4EC15CEE58000840EF8 /* Debug */,
-				9467D4ED15CEE58000840EF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
